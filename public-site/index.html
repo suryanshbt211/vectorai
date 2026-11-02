@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vector · Private AI your organization owns</title>
+<meta name="description" content="Vector runs open-weight AI such as Gemma on your own hardware, even air-gapped, fine-tunes it on your documents, and builds compliance for every country and state into the same platform.">
+<meta name="theme-color" content="#FBFBFD">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<style>
+/* Typography follows Apple's system stack: SF Pro on Apple devices, Inter (bundled, so it works offline
+   and air-gapped) everywhere else. Animation: blur-in hero, floating orbs with parallax, gradient text,
+   page wipe, scroll reveals, a live boundary diagram, marquee customers. All disabled for reduced motion. */
+@font-face{font-family:'Inter';src:url(assets/fonts/inter-latin-wght-normal.woff2) format('woff2');font-weight:100 900;font-display:swap}
+:root{
+  --bg:#FBFBFD; --bg2:#F2F3F7; --card:#FFFFFF; --ink:#1D1D1F; --mute:#6E6E73; --faint:#86868B;
+  --line:rgba(0,0,0,.08); --line2:rgba(0,0,0,.14);
+  --acc:#5544F5; --acct:#4436D8; --acc2:#2F80FF; --accs:#EEEBFF; --ok:#1F8A5B; --oks:#E4F5EC; --warn:#B25E00; --amber:#C9760F;
+  --f-disp:-apple-system,BlinkMacSystemFont,"SF Pro Display","Inter","Segoe UI",Roboto,system-ui,sans-serif;
+  --f-ui:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,system-ui,sans-serif;
+  --f-mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1); --r:20px;
+  --sh:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+html.lenis,html.lenis body{height:auto}.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.5 var(--f-ui);letter-spacing:-.011em;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+@media(max-width:600px){.wrap{padding:0 16px}}
+.eyebrow{font:600 15px var(--f-ui);letter-spacing:-.01em;color:var(--acct)}
+.h1{font:700 clamp(46px,7vw,92px)/1.02 var(--f-disp);letter-spacing:-.045em}
+.h2{font:700 clamp(34px,4.6vw,60px)/1.06 var(--f-disp);letter-spacing:-.04em;margin-top:12px}
+.h3{font:600 22px/1.2 var(--f-disp);letter-spacing:-.025em}
+.shine{background:linear-gradient(90deg,var(--acct),var(--acc2),var(--acc),var(--acct));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+.lead{font-size:clamp(19px,1.6vw,23px);line-height:1.45;color:var(--mute);margin-top:22px;max-width:660px;letter-spacing:-.015em}
+.muted{color:var(--mute)}
+.sec{padding:120px 0;position:relative}
+.alt{background:var(--bg2)}
+.center{text-align:center}.center .lead{margin-left:auto;margin-right:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 24px;border-radius:999px;font:500 16px var(--f-ui);text-decoration:none;border:1px solid var(--line2);background:rgba(255,255,255,.75);color:var(--ink);cursor:pointer;transition:transform .25s var(--ease),box-shadow .3s,background .25s,border-color .25s;position:relative;overflow:hidden}
+.btn:hover{transform:translateY(-2px);border-color:var(--acct)}
+.btn.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+.btn.pri:hover{box-shadow:0 14px 34px -12px rgba(85,68,245,.85)}
+.btn.pri::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.4) 50%,transparent 70%);transform:translateX(-120%);animation:sheen 3.6s ease-in-out infinite}
+.btn svg{width:16px;height:16px}
+.chip{display:inline-flex;align-items:center;gap:6px;font:600 12.5px var(--f-ui);letter-spacing:0;padding:4px 10px;border-radius:999px;background:var(--accs);color:var(--acct);white-space:nowrap}
+.chip.ok{background:var(--oks);color:var(--ok)}
+.chip.ok::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;animation:beatg 2s infinite}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(251,251,253,.78);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid transparent;transition:border-color .3s}
+.nav.sc{border-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;height:64px;gap:24px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;font:600 20px var(--f-disp);letter-spacing:-.03em}
+.brand img{width:28px;height:23px}
+.links{display:flex;gap:2px;margin-left:16px}
+.links a{text-decoration:none;font-size:14px;color:var(--mute);padding:8px 12px;border-radius:999px;transition:color .2s,background .2s}
+.links a:hover,.links a.on{color:var(--ink);background:rgba(0,0,0,.05)}
+.nav .sp{flex:1}
+.nav .btn{height:36px;padding:0 16px;font-size:14px}
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;color:var(--ink)}
+.bartop{position:absolute;left:0;bottom:-1px;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--acc),var(--acc2))}
+@media(max-width:900px){.links{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;flex-direction:column;padding:12px 16px 20px;border-bottom:1px solid var(--line);margin:0}.links.open{display:flex}.burger{display:block}.nav .btn.ghost{display:none}.nav .wrap{gap:10px}}
+
+/* page wipe */
+.wipe{position:fixed;inset:0;z-index:80;pointer-events:none;background:linear-gradient(100deg,#FBFBFD 0%,#DAD7FC 50%,#5544F5 100%);clip-path:inset(0 0 0 100%)}
+.wipe.go{animation:wipe 1s cubic-bezier(.7,0,.2,1) both}
+.rise{animation:pageIn 1s var(--ease) both}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.34s}.d4{animation-delay:.46s}
+
+/* hero */
+.hero{padding:96px 0 110px;position:relative;overflow:hidden}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 60% 30%,#000 10%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 60% 30%,#000 10%,transparent 70%);opacity:.6;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.28;animation:float 14s ease-in-out infinite;will-change:transform;pointer-events:none}
+.herogrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative}
+@media(max-width:980px){.herogrid{grid-template-columns:1fr}}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:28px;font-size:14px;color:var(--mute)}
+.trust span{display:flex;align-items:center;gap:7px}
+.trust svg{width:16px;height:16px;color:var(--ok)}
+.heroviz{position:relative}
+.mock{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 40px 100px -40px rgba(0,0,0,.3),0 0 0 6px rgba(85,68,245,.05);overflow:hidden}
+.mock .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:#FBFBFD;font-size:12.5px;color:var(--mute)}
+.mock .bar i{width:10px;height:10px;border-radius:50%;background:#E5E5EA}
+.mock .bar b{margin-left:8px;color:var(--ink);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.live{display:inline-flex;align-items:center;gap:7px;color:var(--acct);font-weight:600;white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--acc);animation:beat 1.8s infinite}
+.mock .body{padding:18px;display:grid;gap:12px}
+.mcard{border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.mcard .k{font:600 11px var(--f-ui);letter-spacing:.04em;color:var(--faint);text-transform:uppercase}
+.mcard .t{font:600 16px var(--f-disp);letter-spacing:-.02em;margin-top:2px}
+.mrow{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:5px 0;border-top:1px dashed var(--line)}
+.mrow:first-of-type{border-top:0;margin-top:8px}
+.mrow span:first-child{color:var(--mute)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.mgrid{grid-template-columns:1fr}}
+.chat{background:var(--bg2);border-radius:14px;padding:10px 12px;font-size:13.5px;min-height:40px}
+.chat.u{background:var(--ink);color:#fff;justify-self:end;max-width:85%}
+.caret{display:inline-block;width:2px;height:1em;background:var(--acc);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(1) infinite}
+.cite{display:inline-block;font:600 10.5px var(--f-ui);background:var(--accs);color:var(--acct);border-radius:5px;padding:1px 5px;margin-left:3px;animation:pop .4s var(--ease) both}
+.st2{font-size:12px;font-weight:600;padding:2px 8px;border-radius:999px}
+.st2.ok{background:var(--oks);color:var(--ok)}.st2.wip{background:#FFF2DE;color:var(--warn)}
+.fc{position:absolute;right:-22px;bottom:-70px;width:240px;border:1px solid var(--line2);border-radius:18px;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:14px 16px;box-shadow:0 24px 60px -24px rgba(0,0,0,.35);animation:bob 7s ease-in-out infinite}
+.fc .k{font:600 11px var(--f-ui);letter-spacing:.04em;color:var(--faint);text-transform:uppercase}
+.fc svg{display:block;width:100%;height:auto;margin-top:8px}
+.draw{stroke-dasharray:520;stroke-dashoffset:520;animation:draw 2.6s cubic-bezier(.3,.6,.2,1) .8s forwards}
+@media(max-width:980px){.fc{position:relative;right:auto;bottom:auto;width:auto;margin-top:16px}}
+
+/* marquee */
+.strip{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:#fff}
+.strip .lbl{text-align:center;font-size:13px;color:var(--faint)}
+.marquee{display:flex;gap:72px;width:max-content;margin-top:18px;animation:marquee 32s linear infinite}
+.strip:hover .marquee{animation-play-state:paused}
+.marquee div{white-space:nowrap;text-align:center}
+.marquee span{display:block;font:600 19px var(--f-disp);color:#515154;letter-spacing:-.025em}
+.marquee small{display:block;font:500 12px var(--f-ui);color:var(--faint);margin-top:2px}
+.strip .fadeL,.strip .fadeR{position:absolute}
+.mq{position:relative;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:56px;border-top:1px solid var(--line)}
+.stat{padding:28px 24px 0 0}
+.stat .v{font:700 clamp(40px,4.8vw,62px)/1 var(--f-disp);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.stat .l{color:var(--mute);font-size:15px;margin-top:10px;max-width:230px}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 0}.stat{padding-right:12px}.stat .v{font-size:clamp(30px,9vw,44px)}}
+
+/* cards with hover glow */
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:30px;transition:transform .4s var(--ease),border-color .4s,box-shadow .4s,opacity .9s ease,filter .9s ease;overflow:hidden}
+.card::before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:radial-gradient(420px circle at var(--mx,0%) var(--my,0%),rgba(85,68,245,.13),transparent 45%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:rgba(85,68,245,.45);box-shadow:0 30px 60px -30px rgba(0,0,0,.28)}
+.card:hover::before{opacity:1}
+.n{font:600 13px var(--f-ui);color:var(--acct);font-variant-numeric:tabular-nums}
+
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px}
+@media(max-width:860px){.duo{grid-template-columns:1fr}}
+.ico{width:48px;height:48px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center}
+.ico svg{width:22px;height:22px}
+.duo h3{margin-top:20px}
+.duo p{color:var(--mute);margin-top:10px}
+.ticks{list-style:none;margin-top:18px;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;font-size:15.5px}
+.ticks li::before{content:'';flex:none;width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--oks) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F8A5B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/12px no-repeat}
+.models{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.models span{font:500 13px var(--f-mono);border:1px solid var(--line2);border-radius:8px;padding:4px 9px;transition:all .3s}
+.models span.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* boundary diagram */
+.console{margin-top:56px;border:1px solid var(--line2);border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 40px 100px -40px rgba(0,0,0,.3),0 0 0 6px rgba(85,68,245,.05)}
+.console svg{display:block;width:100%;height:auto}
+.chead{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:13px}
+.feed{list-style:none;padding:12px 18px 16px;border-top:1px solid var(--line);font-size:13px;display:flex;flex-direction:column;gap:8px}
+.feed li{display:flex;gap:12px;color:var(--mute);animation:feedIn .6s var(--ease)}
+.feed li:first-child{color:var(--ink)}
+.feed .t{color:var(--acct);min-width:46px;font-variant-numeric:tabular-nums;font-weight:600}
+.ring{transform-box:fill-box;transform-origin:center;animation:ring 2.8s ease-out infinite}
+.ring.b{animation-delay:.7s}.ring.c{animation-delay:1.4s}.ring.e{animation-delay:2.1s}
+.link{stroke-dasharray:4 6;animation:dash 1.6s linear infinite}
+.contour{animation:breathe 8s ease-in-out infinite}
+
+/* steps */
+.track{position:relative;height:2px;background:var(--line2);margin:52px 0 30px;border-radius:2px}
+.track>i{position:absolute;top:-5px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 18px 4px rgba(85,68,245,.5);animation:travel 6s cubic-bezier(.6,0,.4,1) infinite}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}@media(max-width:600px){.steps{grid-template-columns:1fr}}
+.steps h3{margin-top:14px}
+.steps p{color:var(--mute);margin-top:8px;font-size:15.5px}
+
+/* industries */
+.ind{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;margin-top:56px;align-items:start}
+@media(max-width:900px){.ind{grid-template-columns:1fr;gap:28px}}
+.indlist{border-top:1px solid var(--line)}
+.indb{display:flex;align-items:baseline;gap:20px;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:22px 4px;cursor:pointer;color:#AEAEB2;font:700 clamp(28px,3.2vw,42px)/1.1 var(--f-disp);letter-spacing:-.04em;transition:color .3s,padding .4s var(--ease)}
+.indb .n{font:600 13px var(--f-ui);letter-spacing:0;min-width:28px;color:inherit}
+.indb:hover{color:var(--mute)}
+.indb.on{color:var(--ink);padding-left:14px}
+.indb.on .n{color:var(--acct)}
+.indcard{position:sticky;top:90px;min-height:420px}
+.indcard .h3{font-size:28px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px}
+@media(max-width:600px){.two{grid-template-columns:1fr}}
+.indcard h4{font:600 12px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin-bottom:10px}
+.bul{list-style:none;display:grid;gap:8px;font-size:15px}
+.bul li{padding-left:16px;position:relative}
+.bul li::before{content:'';position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:2px;background:var(--acc)}
+.rule .bul li::before{background:var(--ok)}
+.fade>*{animation:pageIn .6s var(--ease) both}.fade>*:nth-child(2){animation-delay:.05s}.fade>*:nth-child(3){animation-delay:.1s}.fade>*:nth-child(4){animation-delay:.15s}
+
+/* healthcare grid */
+.hgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px}
+@media(max-width:1000px){.hgrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hgrid{grid-template-columns:1fr}}
+.hc{padding:22px;display:flex;flex-direction:column;gap:8px}
+.hc .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.hc h3{font:600 18px/1.25 var(--f-disp);letter-spacing:-.02em}
+.hc ul{list-style:none;font-size:14px;color:var(--mute);display:grid;gap:4px}
+.hc li::before{content:'· ';color:var(--acc);font-weight:700}
+.note{font-size:13.5px;color:var(--faint);margin-top:22px;line-height:1.55;max-width:820px}
+
+/* compliance */
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:56px}
+@media(max-width:900px){.comp{grid-template-columns:1fr}}
+.ptop{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.place{display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:center;font-size:15px;padding:11px 0;border-top:1px solid var(--line)}
+.place .l{font:600 14px var(--f-ui);color:var(--warn);text-align:right;font-variant-numeric:tabular-nums}
+.place .sub{grid-column:1/-1;font-size:13px;color:var(--faint)}
+.ph{display:grid;grid-template-columns:1fr auto;gap:18px;font:600 11px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding:14px 0 6px}
+.meter{height:8px;border-radius:9px;background:#E9E9EE;overflow:hidden;margin-top:14px}
+.meter i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--acc2),var(--acc));width:0;transition:width 1.6s var(--ease)}
+.also{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;align-items:center;font-size:14px;color:var(--mute)}
+.also span.chip{background:#fff;border:1px solid var(--line2);color:var(--ink);font-weight:500}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+@media(max-width:900px){.pillars{grid-template-columns:1fr}}
+.pillars h3{margin-top:14px}
+.pillars p{color:var(--mute);margin-top:8px;font-size:15.5px}
+
+/* case highlight */
+.case{display:grid;grid-template-columns:1fr 1fr;border-radius:28px;overflow:hidden;background:#0B0B12;color:#fff;position:relative}
+.case::before{content:"";position:absolute;inset:0;background:radial-gradient(700px circle at 90% 0%,rgba(85,68,245,.45),transparent 55%),radial-gradient(500px circle at 0% 100%,rgba(47,128,255,.25),transparent 55%);pointer-events:none}
+@media(max-width:900px){.case{grid-template-columns:1fr}}
+.case>div{position:relative;padding:52px}
+.case .eyebrow{color:#A79CFF}
+.case h3{font:700 clamp(30px,3.2vw,42px)/1.1 var(--f-disp);letter-spacing:-.04em;margin-top:14px}
+.case p{color:#A1A1A6;margin-top:16px}
+.case .c2{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-content:center}
+.case .v{font:700 48px/1 var(--f-disp);letter-spacing:-.05em}
+.case .l{color:#A1A1A6;font-size:14px;margin-top:8px}
+.case .btn{margin-top:28px;background:#fff;color:var(--ink);border-color:#fff}
+
+.band{padding:110px 0;text-align:center;position:relative;overflow:hidden}
+.band .h2{max-width:820px;margin:12px auto 0}
+.foot{border-top:1px solid var(--line);padding:48px 0 56px;font-size:13.5px;color:var(--mute)}
+.foot .wrap{display:flex;gap:32px;flex-wrap:wrap;justify-content:space-between;align-items:flex-start}
+.foot nav{display:flex;gap:20px;flex-wrap:wrap}
+.foot a{text-decoration:none}.foot a:hover{color:var(--ink)}
+
+/* company */
+.cust{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px}
+@media(max-width:900px){.cust{grid-template-columns:1fr}}
+.cc{padding:0;display:flex;flex-direction:column}
+.cc.wide{grid-column:1/-1;display:grid;grid-template-columns:.9fr 1.1fr}
+@media(max-width:900px){.cc.wide{grid-template-columns:1fr}}
+.cimg{aspect-ratio:16/9;background:var(--bg2);overflow:hidden}
+.cc.wide .cimg{aspect-ratio:auto;min-height:260px}
+.cimg img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.cc:hover .cimg img{transform:scale(1.04)}
+.cimg img[data-fb]{object-fit:contain;padding:12% 20%}
+.cb{padding:28px;display:flex;flex-direction:column;gap:12px}
+.cb .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.cb .meta .dim{font-size:13px;color:var(--faint)}
+.cb h3{font:700 26px/1.15 var(--f-disp);letter-spacing:-.035em}
+.cb p{color:var(--mute);font-size:15.5px}
+.nums{display:flex;gap:28px;flex-wrap:wrap;padding:6px 0}
+.nums b{display:block;font:700 32px/1 var(--f-disp);letter-spacing:-.04em}
+.nums span{font-size:13px;color:var(--mute)}
+.layers{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:4px}
+.layers div{display:grid;grid-template-columns:170px 1fr;gap:14px;padding:11px 14px;font-size:14.5px;border-top:1px solid var(--line)}
+.layers div:first-child{border-top:0}
+.layers span{color:var(--mute)}
+@media(max-width:560px){.layers div{grid-template-columns:1fr;gap:2px}}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:48px;max-width:900px}
+@media(max-width:720px){.team{grid-template-columns:1fr}}
+.tm{padding:0}
+.tm img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--bg2)}
+.tm img[data-fb]{object-fit:contain;padding:14% 26%}
+.tm .tb{padding:24px}
+.tm h3{font:700 22px var(--f-disp);letter-spacing:-.03em}
+.tm .role{font:600 12.5px var(--f-ui);letter-spacing:.03em;color:var(--acct);margin-top:4px}
+.tm p{color:var(--mute);font-size:15px;margin-top:10px}
+
+/* contact */
+.cgrid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start;position:relative}
+@media(max-width:900px){.cgrid{grid-template-columns:1fr}}
+.form{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:0 30px 70px -40px rgba(0,0,0,.3);display:grid;gap:16px}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.f2{grid-template-columns:1fr}.form{padding:22px}}
+.fld label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.fld input,.fld select,.fld textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line2);border-radius:12px;background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s,background .2s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 4px var(--accs)}
+.err{color:#B42318;font-size:14px}
+.thanks{background:#fff;border:1px solid var(--line);border-radius:24px;padding:40px;text-align:center;animation:pageIn .7s var(--ease) both}
+
+/* pages + reveal */
+[data-page][hidden]{display:none!important}
+.page-in{animation:pageIn .9s var(--ease) both}
+.rv{transition:opacity .9s ease,transform .9s var(--ease),filter .9s ease}
+.rv.pre{opacity:.001;transform:translateY(36px);filter:blur(6px)}
+.stag>.rv:nth-child(2){transition-delay:.07s}.stag>.rv:nth-child(3){transition-delay:.14s}.stag>.rv:nth-child(4){transition-delay:.21s}.stag>.rv:nth-child(5){transition-delay:.28s}.stag>.rv:nth-child(6){transition-delay:.35s}.stag>.rv:nth-child(7){transition-delay:.42s}.stag>.rv:nth-child(8){transition-delay:.49s}
+
+/* raw-in / clean-out flow */
+.flowsec{background:linear-gradient(180deg,var(--bg),#F6F5F1 60%,var(--bg))}
+.flowwrap{position:relative;margin-top:40px}
+.flowsvg{display:block;width:100%;height:auto;overflow:hidden}
+.rib-edge{fill:none;stroke:#1D1D1F;stroke-opacity:.7;stroke-width:132;stroke-linecap:butt}
+.rib-fill{fill:none;stroke:#FBFAF7;stroke-width:129;stroke-linecap:butt}
+.rd{fill:none;stroke:#DCD9CF;stroke-width:9;stroke-linecap:round;animation:rawflow 3.2s linear infinite}
+.r1{stroke-dasharray:46 38 18 52}.r2{stroke-dasharray:70 30 22 44;animation-duration:2.6s}.r3{stroke-dasharray:30 26 58 40;animation-duration:3.6s}
+.r4{stroke-dasharray:54 44 16 30;animation-duration:2.9s}.r5{stroke-dasharray:20 60 34 28;animation-duration:4s}.r6{stroke-dasharray:38 30 26 50;animation-duration:3.3s}
+@keyframes rawflow{to{stroke-dashoffset:-268}}
+.tags rect{fill:#fff;stroke:#1D1D1F;stroke-opacity:.25}
+.tags text{font:600 12px var(--f-ui);fill:#6E6E73;text-anchor:middle}
+.box polygon{stroke:#1D1D1F;stroke-width:1.5;stroke-linejoin:round}
+.f-top{fill:#FFFFFF}.f-left{fill:#ECEAE4}.f-right{fill:#DAD7CF}
+.slot{fill:#1D1D1F;stroke:none!important}
+.cover,.cover2{stroke:none!important}
+.edge{stroke:#1D1D1F;stroke-width:1.5}
+.brandtxt{font:700 34px var(--f-disp);letter-spacing:-.03em;fill:#1D1D1F}
+.brandsub{font:500 14px var(--f-ui);fill:#86868B}
+.leds circle{fill:#1F8A5B;animation:led 1.6s ease-in-out infinite}
+.leds circle:nth-child(2){animation-delay:.3s}.leds circle:nth-child(3){animation-delay:.6s;fill:#5544F5}
+@keyframes led{0%,100%{opacity:.25}50%{opacity:1}}
+.scan{fill:url(#glowOut);opacity:0;stroke:none!important;animation:scan 4s ease-in-out infinite;mix-blend-mode:multiply}
+@keyframes scan{0%,100%{opacity:0}50%{opacity:.18}}
+.out-edge{fill:none;stroke:url(#outFade);stroke-width:96;stroke-linecap:butt}
+.out-fill{fill:none;stroke:#FFFFFF;stroke-width:93;stroke-linecap:butt}
+.out-line{fill:none;stroke:#5544F5;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:90 520;animation:outflow 2.4s linear infinite;opacity:.75}
+.out-line.l1{animation-delay:-.8s;stroke:#2F80FF}.out-line.l3{animation-delay:-1.6s}
+@keyframes outflow{to{stroke-dashoffset:-610}}
+.pills rect{fill:#1D1D1F}
+.pills text{font:600 12px var(--f-ui);fill:#fff;text-anchor:middle}
+.flowcaps{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:8px}
+.flowcap{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--mute);max-width:380px}
+.flowcap b{font:700 20px var(--f-disp);letter-spacing:-.03em;color:var(--ink)}
+.flowcap.in{justify-self:end;text-align:right}
+@media(max-width:700px){.flowcaps{grid-template-columns:1fr}.flowcap.in{justify-self:start;text-align:left}}
+
+/* service area tabs */
+.hgrid.six{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1000px){.hgrid.six{grid-template-columns:1fr 1fr}}@media(max-width:560px){.hgrid.six{grid-template-columns:1fr}}
+.areatabs{display:flex;gap:10px;flex-wrap:wrap;margin-top:36px}
+.areab{display:flex;align-items:baseline;gap:10px;background:#fff;border:1px solid var(--line2);border-radius:999px;padding:10px 20px;cursor:pointer;font:600 17px var(--f-disp);letter-spacing:-.02em;color:var(--mute);transition:all .3s var(--ease)}
+.areab .n{font-size:12px;color:var(--faint)}
+.areab:hover{color:var(--ink);border-color:var(--acct)}
+.areab.on{background:var(--ink);color:#fff;border-color:var(--ink);transform:translateY(-1px);box-shadow:0 10px 24px -12px rgba(0,0,0,.5)}
+.areab.on .n{color:#A79CFF}
+.areatabs.small .areab{font-size:14.5px;padding:8px 16px}
+.hgrid .hc{animation:pageIn .6s var(--ease) both}
+.hgrid .hc:nth-child(2){animation-delay:.04s}.hgrid .hc:nth-child(3){animation-delay:.08s}.hgrid .hc:nth-child(4){animation-delay:.12s}.hgrid .hc:nth-child(5){animation-delay:.16s}.hgrid .hc:nth-child(6){animation-delay:.2s}.hgrid .hc:nth-child(7){animation-delay:.24s}.hgrid .hc:nth-child(8){animation-delay:.28s}
+
+/* compliance layers */
+.compgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;margin-top:28px;align-items:start}
+@media(max-width:900px){.compgrid{grid-template-columns:1fr}}
+.layers3{position:relative;height:440px;perspective:900px}
+.lay{position:absolute;left:8%;right:8%;height:74px;border-radius:16px;border:1px solid var(--line2);background:#fff;transform:rotateX(58deg) rotateZ(-38deg);transform-origin:center;display:flex;align-items:center;justify-content:center;transition:transform .6s var(--ease),box-shadow .6s,background .4s;box-shadow:0 22px 30px -18px rgba(0,0,0,.25);cursor:pointer}
+.lay span{font:700 15px var(--f-disp);letter-spacing:-.02em;color:var(--ink);transform:rotateZ(0deg)}
+.lay small{display:block;font:500 11px var(--f-ui);color:var(--faint);text-align:center}
+.lay.on{background:var(--ink);box-shadow:0 30px 40px -18px rgba(85,68,245,.55)}
+.lay.on span,.lay.on small{color:#fff}
+.lay.on{transform:rotateX(58deg) rotateZ(-38deg) translateZ(22px)}
+.rulecard{min-height:440px}
+.lgroup{margin-top:18px}
+.lgroup h4{display:flex;justify-content:space-between;align-items:baseline;font:600 12px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding-bottom:6px;border-bottom:1px solid var(--line)}
+.rrow{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:10px 0;border-bottom:1px solid var(--line);animation:pageIn .5s var(--ease) both}
+.rrow b{font-weight:600;font-size:15px}
+.rrow .pen{font:600 13px var(--f-ui);color:var(--warn);text-align:right;white-space:nowrap}
+.rrow .eg{grid-column:1/-1;font-size:12.5px;color:var(--faint)}
+.lgroup.hl h4{color:var(--acct)}
+
+/* check flow + live demo */
+.checkflow{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px;align-items:start}
+@media(max-width:900px){.checkflow{grid-template-columns:1fr}}
+.cfsteps{display:grid;gap:10px;position:relative}
+.cfsteps::before{content:"";position:absolute;left:21px;top:20px;bottom:20px;width:2px;background:linear-gradient(var(--acc),var(--acc2));opacity:.25}
+.cfs{display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;position:relative}
+.cfs .n{grid-row:span 2;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:12px}
+.cfs b{font:600 16px var(--f-disp);letter-spacing:-.02em}
+.cfs span:last-child{color:var(--mute);font-size:14px}
+.cfs.on{border-color:var(--acc);box-shadow:0 12px 30px -16px rgba(85,68,245,.6)}
+.checkdemo{padding:22px}
+.cdh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.cdh .k{font:600 11px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
+.cdh b{font:700 20px var(--f-disp);letter-spacing:-.03em}
+.cdh .live{font-size:13px;text-align:right}
+.cdbig{display:flex;align-items:baseline;gap:4px;margin:14px 0 10px;flex-wrap:wrap}
+.cdbig>span{font:700 44px/1 var(--f-disp);letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.cdbig small{font-size:18px;color:var(--mute)}
+.cdbar{flex-basis:100%;height:8px;border-radius:8px;background:#ECECF1;overflow:hidden;margin-top:8px}
+.cdbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc2),var(--acc));transition:width .8s var(--ease)}
+.cdr{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--line);font-size:14px}
+.cdr .ic{width:22px;height:22px;border-radius:50%;border:2px solid #E5484D;display:grid;place-items:center;font-size:11px;font-weight:700;transition:all .4s}
+.cdr.done .ic{border-color:transparent;background:var(--oks);color:var(--ok)}
+.cdr .st{font-size:12px;font-weight:600;padding:3px 9px;border-radius:999px;background:#FDECEC;color:#C4373C;white-space:nowrap;transition:all .4s}
+.cdr.done .st{background:var(--oks);color:var(--ok)}
+.cdr .sub{display:block;font-size:12px;color:var(--faint)}
+.cdr.flash{animation:flash .9s var(--ease)}
+@keyframes flash{0%{background:rgba(85,68,245,.12)}100%{background:transparent}}
+.cdaudit{margin-top:12px;font:500 12px var(--f-mono);color:var(--faint);min-height:36px;display:flex;flex-direction:column;gap:3px}
+.cdaudit div{animation:feedIn .5s var(--ease)}
+.cdaudit b{color:var(--acct)}
+
+
+/* customers carousel */
+.cfilter{display:flex;gap:8px;flex-wrap:wrap;margin-top:32px}
+.fb{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line2);border-radius:999px;padding:8px 16px;font:600 14.5px var(--f-ui);color:var(--mute);cursor:pointer;transition:all .3s var(--ease)}
+.fb span{font-size:12px;background:var(--bg2);color:var(--ink);border-radius:999px;padding:1px 8px}
+.fb:hover{color:var(--ink);border-color:var(--acct)}
+.fb.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.fb.on span{background:rgba(255,255,255,.18);color:#fff}
+.ccar{margin-top:28px;overflow:hidden;padding:10px 0 20px;mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.ccar.still{mask-image:none;-webkit-mask-image:none;max-width:1160px;margin-left:auto;margin-right:auto;padding-left:24px;padding-right:24px}
+.ctrack{display:flex;gap:18px;width:max-content}
+.ccar.still .ctrack{width:auto;flex-wrap:wrap}
+.ctrack.run{animation:marquee 46s linear infinite}
+.ccar:hover .ctrack.run{animation-play-state:paused}
+.cu{width:340px;padding:0;display:flex;flex-direction:column;flex:none;animation:pageIn .5s var(--ease) both}
+.cimg2{height:120px;background:var(--bg2);overflow:hidden}
+.cimg2 img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.cimg2 img[data-fb]{object-fit:contain;padding:18px}
+.cu:hover .cimg2 img{transform:scale(1.05)}
+.cb2{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px}
+.cb2 .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.cb2 .meta .dim{font-size:12.5px;color:var(--faint)}
+.cb2 h3{font:700 19px/1.2 var(--f-disp);letter-spacing:-.03em}
+.nums.sm{gap:18px;padding:0}
+.nums.sm b{font-size:21px}
+.nums.sm span{font-size:12px}
+.bubbles{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line);margin-top:2px}
+.bubbles span{position:relative;display:block;font-size:13.5px;line-height:1.4;padding:9px 0 9px 26px;border-bottom:1px solid var(--line);color:var(--ink)}
+.bubbles span::before{content:'';position:absolute;left:0;top:11px;width:16px;height:16px;border-radius:50%;background:var(--oks) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231F8A5B' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12l4 4 8-8'/%3E%3C/svg%3E") center/10px no-repeat}
+.bubbles span.star{font-weight:600}
+.bubbles span.star::before{background:#FFF1CC url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23B7791F'%3E%3Cpath d='M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z'/%3E%3C/svg%3E") center/11px no-repeat}
+.bubbles span:last-child{border-bottom:0}
+.devs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:820px){.devs{grid-template-columns:1fr 1fr}}
+.dev{padding:22px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+.dev img{width:120px;height:120px;border-radius:50%;object-fit:cover;background:var(--bg2);margin-bottom:8px}
+.dev img[data-fb]{object-fit:contain;padding:20px}
+.dev h3{font:700 18px var(--f-disp);letter-spacing:-.02em}
+.dev .role{font:600 11.5px var(--f-ui);letter-spacing:.05em;color:var(--acct)}
+@media(max-width:600px){.cu{width:290px}.ccar.still .cu{width:100%}}
+
+/* testimonials */
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+@media(max-width:1000px){.tgrid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.tgrid{grid-template-columns:1fr}}
+.tq{padding:24px;display:flex;flex-direction:column;gap:14px;margin:0}
+.qm{font:700 54px/0.6 var(--f-disp);color:var(--acc);height:26px}
+.tq blockquote{font-size:16px;line-height:1.5;color:var(--ink);flex:1}
+.tq blockquote.ph{color:var(--faint);font-style:italic}
+.tq figcaption b{display:block;font-weight:600}
+.tq figcaption span{font-size:13px;color:var(--mute)}
+
+/* team */
+.tgroup{font:600 13px var(--f-ui);letter-spacing:.05em;text-transform:uppercase;color:var(--faint);margin:40px 0 14px}
+.team2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:820px){.team2{grid-template-columns:1fr}}
+.tm2{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:22px;align-items:start}
+.tm2 img{width:96px;height:96px;border-radius:50%;object-fit:cover;background:var(--bg2)}
+.tm2 img[data-fb]{object-fit:contain;padding:18px}
+.tm2 h3{font:700 19px var(--f-disp);letter-spacing:-.03em}
+.tm2 .role{font:600 11.5px var(--f-ui);letter-spacing:.05em;color:var(--acct);margin-top:3px}
+.tm2 .sub{font-size:13.5px;color:var(--ink);margin-top:2px}
+.tm2 p{color:var(--mute);font-size:14px;margin-top:8px}
+
+/* calendly */
+.calcard{padding:22px}
+.calhead{display:flex;gap:14px;align-items:flex-start;margin-bottom:10px}
+.calico{width:44px;height:44px;border-radius:12px;background:var(--accs);color:var(--acct);display:grid;place-items:center;flex:none}
+.calico svg{width:22px;height:22px}
+.calframe{display:block;width:100%;height:720px;border:0;border-radius:14px;background:var(--bg2)}
+@media(max-width:600px){.calframe{height:900px}}
+
+@keyframes pageIn{from{opacity:0;transform:translateY(24px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes wipe{0%{clip-path:inset(0 100% 0 0)}45%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 0 0 100%)}}
+@keyframes sheen{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes shine{to{background-position:200% 0}}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@keyframes beat{0%{box-shadow:0 0 0 0 rgba(85,68,245,.6)}100%{box-shadow:0 0 0 10px rgba(85,68,245,0)}}
+@keyframes beatg{0%{box-shadow:0 0 0 0 rgba(31,138,91,.5)}100%{box-shadow:0 0 0 7px rgba(31,138,91,0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes ring{0%{transform:scale(.6);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+@keyframes dash{to{stroke-dashoffset:-20}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes breathe{0%,100%{opacity:.45}50%{opacity:.85}}
+@keyframes travel{0%{left:0}50%{left:calc(100% - 12px)}100%{left:0}}
+@keyframes feedIn{from{transform:translateY(-6px);opacity:.3}to{transform:none;opacity:1}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv.pre{opacity:1;transform:none;filter:none}.draw{stroke-dashoffset:0}.shine{color:var(--acct)}}
+</style>
+</head>
+<body>
+<div class="wipe" id="wipe" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" data-go="home"><img src="assets/logo.svg" alt="">Vector</a>
+    <nav class="links" id="links" aria-label="Main">
+      <a href="#platform" data-go="home" data-to="platform">Platform</a>
+      <a href="#how" data-go="home" data-to="how">How it works</a>
+      <a href="#areas" data-go="home" data-to="areas">Service areas</a>
+      <a href="#compliance" data-go="home" data-to="compliance">Compliance</a>
+      <a href="#company" data-go="company">Company</a>
+    </nav>
+    <span class="sp"></span>
+    <a class="btn ghost" href="app/">Sign in</a>
+    <a class="btn pri" href="#contact" data-go="contact">Book a demo</a>
+    <button class="burger" id="burger" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+  <div class="bartop" id="bartop"></div>
+</header>
+
+<!-- ======================= HOME ======================= -->
+<main data-page="home">
+
+<section class="hero">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="orb" data-par=".25" aria-hidden="true" style="width:520px;height:520px;background:#5544F5;top:-170px;right:-130px"></div>
+  <div class="orb" data-par=".12" aria-hidden="true" style="width:420px;height:420px;background:#2F80FF;bottom:-220px;left:-160px;animation-delay:-6s"></div>
+  <div class="wrap herogrid">
+    <div>
+      <div class="eyebrow rise">Private AI. Owned intelligence. Built-in compliance.</div>
+      <h1 class="h1 rise d1" style="margin-top:16px">AI that your organization <span class="shine">owns.</span></h1>
+      <p class="lead rise d2">Vector runs open-weight models like Gemma on your own hardware, even fully air-gapped. It learns from your documents, becomes your own model, and shows every rule you must follow in every country and state you operate in.</p>
+      <div class="cta-row rise d3"><a class="btn pri" href="#contact" data-go="contact">Book a demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn" href="#how" data-go="home" data-to="how">See how it works</a></div>
+      <div class="trust rise d4">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5 9-10"/></svg>No external AI API</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5 9-10"/></svg>Runs on your servers</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12l5 5 9-10"/></svg>Swap models any time</span>
+      </div>
+    </div>
+    <div class="heroviz rise d2">
+      <div class="mock" aria-label="Product preview">
+        <div class="bar"><i></i><i></i><i></i><b>Pulse Emergency Hospital</b><span class="live"><span class="dot"></span>On site</span></div>
+        <div class="body">
+          <div class="mgrid">
+            <div class="mcard"><div class="k">Internal AI</div><div class="t">pulse-assistant:v2</div>
+              <div class="mrow"><span>Built from</span><span id="mbase">Gemma</span></div>
+              <div class="mrow"><span>Knows</span><span>13 documents</span></div>
+              <div class="mrow"><span>Learned</span><span>approved examples</span></div></div>
+            <div class="mcard"><div class="k">Physical AI</div><div class="t">On-site server</div>
+              <div class="mrow"><span>Runtime</span><span>Ollama, local</span></div>
+              <div class="mrow"><span>Network</span><span>Air-gapped</span></div>
+              <div class="mrow"><span>Cloud calls</span><span>0</span></div></div>
+          </div>
+          <div class="chat u" id="q">Within how many hours must a cyber incident be reported to CERT-In?</div>
+          <div class="chat" id="a"><span class="caret"></span></div>
+          <div class="mcard"><div class="k">Compliance · national and state rules</div>
+            <div class="mrow"><span>Data protection law</span><span class="st2 ok">Evidenced</span></div>
+            <div class="mrow"><span>Cyber incident reporting</span><span class="st2 ok">Evidenced</span></div>
+            <div class="mrow"><span>State registration renewal</span><span class="st2 wip">In progress</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc" aria-hidden="true">
+        <div class="k">Evaluation · your own test set</div>
+        <svg viewBox="0 0 220 80"><path d="M0 64C30 58 50 60 70 48S110 40 140 28S190 18 220 12L220 58C190 58 170 62 140 62S100 68 70 68S30 72 0 74Z" fill="#2F80FF" fill-opacity=".12"/><line x1="0" y1="36" x2="220" y2="36" stroke="#C9760F" stroke-opacity=".6" stroke-dasharray="3 4"/><path class="draw" d="M0 66C30 60 50 62 70 50S110 42 140 30S190 20 220 14" fill="none" stroke="#4436D8" stroke-width="2.2"/></svg>
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--faint);margin-top:6px"><span>gemma3</span><span>v1</span><span>v2</span><span>release gate ┄</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="strip" aria-label="Customers">
+  <div class="lbl">Deployed and running inside</div>
+  <div class="mq"><div class="marquee" id="marquee">
+    <div><span>MIT-WPU</span><small>Education · 27,000 students</small></div>
+    <div><span>Shri Ram College of Commerce</span><small>Education · University of Mumbai</small></div>
+    <div><span>Illuminati Humanista</span><small>Law</small></div>
+    <div><span>Pulse Emergency Hospital</span><small>Healthcare · Mumbai</small></div>
+  </div></div>
+</section>
+
+<section class="sec flowsec" id="how">
+  <div class="wrap">
+    <div class="rv center"><div class="eyebrow">What happens inside</div><h2 class="h2">Raw in. <span class="shine">Owned intelligence out.</span></h2><p class="lead">Scanned files, records, policies and rule books go in as they are. Cited answers, drafts and audit-ready compliance come out, from a machine that never talks to the internet.</p></div>
+    <div class="flowwrap rv">
+      <svg class="flowsvg" viewBox="0 0 1000 600" role="img" aria-label="Messy documents flow into a Vector appliance and come out as clean answers, drafts and compliance reports.">
+        <defs>
+          <linearGradient id="outFade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1D1D1F" stop-opacity=".9"/><stop offset="1" stop-color="#1D1D1F" stop-opacity="0"/></linearGradient>
+          <linearGradient id="glowOut" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5544F5" stop-opacity="0"/><stop offset=".5" stop-color="#5544F5" stop-opacity=".9"/><stop offset="1" stop-color="#2F80FF" stop-opacity="0"/></linearGradient>
+          <path id="inPath" d="M1060 -40 C 960 10, 920 70, 860 110 S 700 200, 560 260"/>
+          <path id="outPath" d="M386 340 C 330 400, 250 420, 170 455 S 40 540, -60 620"/>
+        </defs>
+        <!-- raw input ribbon (behind the box) -->
+        <use href="#inPath" class="rib-edge" />
+        <use href="#inPath" class="rib-fill" />
+        <g class="raw">
+          <use href="#inPath" class="rd r1" transform="translate(-26,-30)"/><use href="#inPath" class="rd r2" transform="translate(-10,-12)"/>
+          <use href="#inPath" class="rd r3" transform="translate(8,6)"/><use href="#inPath" class="rd r4" transform="translate(24,26)"/>
+          <use href="#inPath" class="rd r5" transform="translate(-40,-46)"/><use href="#inPath" class="rd r6" transform="translate(38,44)"/>
+        </g>
+        <g class="tags">
+          <g><rect x="-44" y="-13" width="88" height="26" rx="8"/><text y="5">scanned PDF</text><animateMotion dur="7s" repeatCount="indefinite" rotate="0"><mpath href="#inPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="7s" repeatCount="indefinite"/></g>
+          <g><rect x="-44" y="-13" width="88" height="26" rx="8"/><text y="5">EMR export</text><animateMotion dur="7s" begin="1.75s" repeatCount="indefinite"><mpath href="#inPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="7s" begin="1.75s" repeatCount="indefinite"/></g>
+          <g><rect x="-44" y="-13" width="88" height="26" rx="8"/><text y="5">rule book</text><animateMotion dur="7s" begin="3.5s" repeatCount="indefinite"><mpath href="#inPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="7s" begin="3.5s" repeatCount="indefinite"/></g>
+          <g><rect x="-44" y="-13" width="88" height="26" rx="8"/><text y="5">contract</text><animateMotion dur="7s" begin="5.25s" repeatCount="indefinite"><mpath href="#inPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.75;1" dur="7s" begin="5.25s" repeatCount="indefinite"/></g>
+        </g>
+        <!-- the appliance -->
+        <g class="box">
+          <polygon class="f-left" points="220,240 500,400 500,490 220,330"/>
+          <polygon class="f-right" points="500,400 780,240 780,330 500,490"/>
+          <polygon class="f-top" points="500,80 780,240 500,400 220,240"/>
+          <polygon class="slot" points="296,304 452,393 452,405 296,316"/>
+          <g transform="matrix(0.866,0.5,-0.866,0.5,500,240)"><text class="brandtxt" x="0" y="8" text-anchor="middle">Vector</text><text class="brandsub" x="0" y="34" text-anchor="middle">on-site · air-gapped</text></g>
+          <g class="leds"><circle cx="560" cy="430" r="4"/><circle cx="584" cy="416" r="4"/><circle cx="608" cy="402" r="4"/></g>
+          <polygon class="scan" points="500,80 780,240 500,400 220,240"/>
+        </g>
+        <!-- clean output ribbon -->
+        <use href="#outPath" class="out-edge"/>
+        <use href="#outPath" class="out-fill"/>
+        <use href="#outPath" class="out-line l1" transform="translate(-22,-14)"/><use href="#outPath" class="out-line l2"/><use href="#outPath" class="out-line l3" transform="translate(22,14)"/>
+        <polygon class="f-left cover" points="220,240 500,400 500,398 452,398 296,309 220,265"/>
+        <polygon class="f-left cover2" points="220,240 500,400 452,393 296,304 220,262" />
+        <polygon class="slot" points="296,304 452,393 452,405 296,316"/>
+        <line x1="220" y1="240" x2="500" y2="400" class="edge"/>
+        <g class="pills">
+          <g><rect x="-62" y="-14" width="124" height="28" rx="14"/><text y="5">✓ cited answer</text><animateMotion dur="8s" repeatCount="indefinite"><mpath href="#outPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.5;.62" dur="8s" repeatCount="indefinite"/></g>
+          <g><rect x="-62" y="-14" width="124" height="28" rx="14"/><text y="5">✓ drafted summary</text><animateMotion dur="8s" begin="2s" repeatCount="indefinite"><mpath href="#outPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.5;.62" dur="8s" begin="2s" repeatCount="indefinite"/></g>
+          <g><rect x="-62" y="-14" width="124" height="28" rx="14"/><text y="5">✓ compliance report</text><animateMotion dur="8s" begin="4s" repeatCount="indefinite"><mpath href="#outPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.5;.62" dur="8s" begin="4s" repeatCount="indefinite"/></g>
+          <g><rect x="-62" y="-14" width="124" height="28" rx="14"/><text y="5">✓ audit block hashed</text><animateMotion dur="8s" begin="6s" repeatCount="indefinite"><mpath href="#outPath"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.5;.62" dur="8s" begin="6s" repeatCount="indefinite"/></g>
+        </g>
+      </svg>
+      <div class="flowcaps"><div class="flowcap out"><b>Clean out ↙</b><span>Cited answers, drafts for review, compliance status and reports, every step hashed.</span></div>
+      <div class="flowcap in"><b>↗ Raw in</b><span>Scans, exports, policies, circulars, contracts, rule books. Untagged, unstructured, as they are.</span></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec" style="padding-top:100px">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Why it matters</div><h2 class="h2" style="max-width:880px">The most valuable data never leaves the building. Now the AI doesn't either.</h2></div>
+    <div class="stats rv">
+      <div class="stat"><div class="v" data-count="32000" data-suffix="+">32,000+</div><div class="l">students served by Vector deployments in education</div></div>
+      <div class="stat"><div class="v" data-count="320000" data-prefix="$" data-suffix="+">$320,000+</div><div class="l">in payments processed through this system</div></div>
+      <div class="stat"><div class="v">3</div><div class="l">industries in production: education, law and healthcare</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="platform">
+  <div class="wrap">
+    <div class="rv center"><div class="eyebrow">Your personal AI</div><h2 class="h2">Two kinds of AI. <span class="shine">Both yours.</span></h2><p class="lead">Every organization gets an internal AI that knows its work, running on physical AI it controls: a machine inside its own building.</p></div>
+    <div class="duo stag">
+      <div class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 0V4M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 0"/></svg></div>
+        <h3 class="h3">Internal AI</h3>
+        <p>Your own model, built on open weights and shaped by your documents, your approved answers and your rules.</p>
+        <ul class="ticks"><li>Answers from your policies, with citations</li><li>Fine-tuned on approved examples from your work</li><li>Evaluated on your own test questions before it goes live</li><li>Applications beyond chat: drafting, redaction, review, triage</li></ul>
+      </div>
+      <div class="card rv">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></div>
+        <h3 class="h3">Physical AI</h3>
+        <p>The hardware your AI runs on, inside your walls: a laptop for a demo, a server room for production, GPUs when you need them.</p>
+        <ul class="ticks"><li>Ollama runtime on site, works fully air-gapped</li><li>Gemma by default, with the choice to add more models</li><li>Models, data, prompts and logs never leave the machine</li><li>Every action written to a tamper-evident audit chain</li></ul>
+        <div class="models" id="models"><span class="on">gemma3</span><span>llama</span><span>qwen</span><span>mistral</span><span>phi</span><span>+ your own</span></div>
+      </div>
+    </div>
+
+    <div class="console rv">
+      <div class="chead"><span class="live"><span class="dot"></span>Inside your boundary · illustrative</span><span class="muted">air-gapped · 0 B egress</span></div>
+      <svg viewBox="0 0 640 300" role="img" aria-label="Diagram: documents, index, the on-site model, applications, compliance and the audit log all run inside the customer boundary. The link to external AI APIs is blocked.">
+        <defs>
+          <pattern id="dotsH" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" fill="#5544F5" fill-opacity=".16"/></pattern>
+          <linearGradient id="bgH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCFCFF"/><stop offset="1" stop-color="#F0F0F8"/></linearGradient>
+          <radialGradient id="glowH"><stop offset="0" stop-color="#5544F5" stop-opacity=".28"/><stop offset=".6" stop-color="#5544F5" stop-opacity=".07"/><stop offset="1" stop-color="#5544F5" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="640" height="300" fill="url(#bgH)"/><rect width="640" height="300" fill="url(#dotsH)"/>
+        <circle class="contour" cx="360" cy="160" r="120" fill="url(#glowH)"/>
+        <rect class="link" x="150" y="24" width="470" height="252" rx="22" fill="#5544F5" fill-opacity=".03" stroke="#4436D8" stroke-opacity=".5" stroke-width="1.4"/>
+        <text x="168" y="46" fill="#4436D8" font-size="10.5" font-family="-apple-system,Inter,sans-serif" font-weight="600" letter-spacing="1">CUSTOMER BOUNDARY</text>
+        <text x="604" y="46" fill="#6E6E73" font-size="10" font-family="-apple-system,Inter,sans-serif" text-anchor="end" letter-spacing="1">NO EXTERNAL EGRESS</text>
+        <rect x="22" y="120" width="90" height="60" rx="12" fill="#fff" stroke="#1D1D1F" stroke-opacity=".2"/>
+        <text x="67" y="146" fill="#6E6E73" font-size="10" font-family="-apple-system,Inter,sans-serif" text-anchor="middle">EXTERNAL</text>
+        <text x="67" y="161" fill="#6E6E73" font-size="10" font-family="-apple-system,Inter,sans-serif" text-anchor="middle">AI APIS</text>
+        <line x1="112" y1="150" x2="150" y2="150" stroke="#C9760F" stroke-width="1.6" stroke-dasharray="3 4"/>
+        <circle cx="131" cy="150" r="8" fill="#fff" stroke="#C9760F"/><path d="M127 146l8 8M135 146l-8 8" stroke="#C9760F" stroke-width="1.6" stroke-linecap="round"/>
+        <text x="131" y="174" fill="#B0650A" font-size="9.5" font-family="-apple-system,Inter,sans-serif" text-anchor="middle" font-weight="600">BLOCKED</text>
+        <circle r="4" fill="#C9760F"><animateMotion dur="3s" repeatCount="indefinite" path="M112 150 L122 150"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.8;1" dur="3s" repeatCount="indefinite"/></circle>
+        <g stroke="#4436D8" stroke-opacity=".45" stroke-width="1.4" fill="none"><line class="link" x1="200" y1="110" x2="320" y2="76"/><line class="link" x1="320" y1="76" x2="360" y2="160"/><line class="link" x1="200" y1="110" x2="250" y2="236"/><line class="link" x1="250" y1="236" x2="360" y2="160"/><line class="link" x1="360" y1="160" x2="520" y2="106"/><line class="link" x1="360" y1="160" x2="540" y2="212"/><line class="link" x1="360" y1="160" x2="430" y2="252"/></g>
+        <g fill="none" stroke="#5544F5"><circle class="ring" cx="360" cy="160" r="10"/><circle class="ring b" cx="200" cy="110" r="10"/><circle class="ring c" cx="520" cy="106" r="10"/><circle class="ring e" cx="540" cy="212" r="10"/></g>
+        <g fill="#1D1D1F"><circle cx="200" cy="110" r="6"/><circle cx="320" cy="76" r="6"/><circle cx="360" cy="160" r="9" fill="#5544F5"/><circle cx="250" cy="236" r="6"/><circle cx="520" cy="106" r="6"/><circle cx="540" cy="212" r="6"/><circle cx="430" cy="252" r="6"/></g>
+        <g font-family="-apple-system,Inter,sans-serif" font-size="10.5" fill="#6E6E73" font-weight="500"><text x="166" y="136">DOCUMENTS</text><text x="300" y="62">INDEX</text><text x="376" y="188">GEMMA · OLLAMA</text><text x="226" y="262">EVALS</text><text x="478" y="90">ASSISTANT + APPS</text><text x="494" y="238">COMPLIANCE</text><text x="400" y="276">AUDIT CHAIN</text></g>
+        <circle r="5" fill="#2F80FF"><animateMotion dur="6s" repeatCount="indefinite" path="M200 110 L320 76 L360 160 L520 106"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="6s" repeatCount="indefinite"/></circle>
+        <circle r="5" fill="#1D1D1F"><animateMotion dur="7s" begin="1.5s" repeatCount="indefinite" path="M250 236 L360 160 L540 212"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.9;1" dur="7s" begin="1.5s" repeatCount="indefinite"/></circle>
+      </svg>
+      <ul class="feed" id="feed">
+        <li><span class="t">10:04</span><span>Gemma answered a staff question with 2 citations</span></li>
+        <li><span class="t">09:58</span><span>Access policy blocked a retrieval outside the user's department</span></li>
+        <li><span class="t">09:41</span><span>Document index updated: 13 policies</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Step by step</div><h2 class="h2">From documents to your own model.</h2></div>
+    <div class="track" aria-hidden="true"><i></i></div>
+    <div class="steps stag">
+      <div class="card rv"><div class="n">01</div><h3 class="h3">Install on your hardware</h3><p>Vector and Ollama run on a machine you own. No cloud account, no outbound connection.</p></div>
+      <div class="card rv"><div class="n">02</div><h3 class="h3">Select documents</h3><p>Upload policies and procedures, tag them by department, and choose which ones the AI answers from and learns from.</p></div>
+      <div class="card rv"><div class="n">03</div><h3 class="h3">Choose models</h3><p>Start with Gemma. Add or swap open-weight models as they improve; nothing is locked in.</p></div>
+      <div class="card rv"><div class="n">04</div><h3 class="h3">Fine-tune</h3><p>Your model drafts examples from your documents, people approve them, and a new version of your own model is built and evaluated.</p></div>
+      <div class="card rv"><div class="n">05</div><h3 class="h3">Chat and applications</h3><p>Staff get cited answers and task-specific applications, each with a clear rule for who reviews the output.</p></div>
+      <div class="card rv"><div class="n">06</div><h3 class="h3">Compliance and reports</h3><p>See readiness by country and state, the probable loss if a rule is ignored, assign the work and print the report.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt" id="areas">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Service areas</div><h2 class="h2" style="max-width:900px">Totally personalized AI for <span class="shine" id="areaWord">hospitals</span>, on their own hardware.</h2><p class="lead" id="areaLead">Patient data stays inside the hospital network. One private platform serves clinical, operations, billing, compliance and research teams, with role-based access, audit logs and human approval where it matters.</p></div>
+    <div class="areatabs rv" id="areatabs" role="tablist"></div>
+    <div class="hgrid" id="areagrid"></div>
+    <p class="note rv" id="areanote"></p>
+  </div>
+</section>
+
+<section class="sec" id="compliance">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Built-in compliance</div><h2 class="h2" style="max-width:920px">Every rule that applies to you, layer by layer, and what it costs to ignore it.</h2><p class="lead">Choose your service area and where you operate. Vector already knows the rules: international standards, national law, state or provincial law, local and board rules, and your own policies. It checks every document against them, shows what is done and what is pending, and estimates the probable loss if a rule is not complied with.</p></div>
+    <div class="areatabs small rv" id="compTabs" role="tablist"></div>
+    <div class="compgrid rv">
+      <div class="layers3" id="layers3" aria-hidden="true"></div>
+      <div class="card rulecard" id="rulecard"></div>
+    </div>
+
+    <div class="checkflow rv">
+      <div class="cfsteps stag" id="cfsteps">
+        <div class="cfs rv"><span class="n">01</span><b>Rules predefined</b><span>Everything your area and places require, already loaded.</span></div>
+        <div class="cfs rv"><span class="n">02</span><b>Run the check</b><span>One button reads every uploaded document and every value entered. Checks differ by industry.</span></div>
+        <div class="cfs rv"><span class="n">03</span><b>Done and pending</b><span>Per rule: what is met, what is missing, what has expired.</span></div>
+        <div class="cfs rv"><span class="n">04</span><b>Assign what is needed</b><span>Documents, numbers and dates become tasks for the right team.</span></div>
+        <div class="cfs rv"><span class="n">05</span><b>Provided, re-checked, hashed</b><span>Each input updates compliance at once and lands in the audit chain.</span></div>
+      </div>
+      <div class="card checkdemo" id="checkdemo" aria-label="Animated example of a compliance check">
+        <div class="cdh"><div><div class="k">Compliance check · example</div><b id="cdTitle">Hospital</b></div><span class="live"><span class="dot"></span><span id="cdState">Checking documents…</span></span></div>
+        <div class="cdbig"><span id="cdPct">0</span><small>%</small><div class="cdbar"><i id="cdBar"></i></div></div>
+        <div id="cdRows"></div>
+        <div class="cdaudit" id="cdAudit"></div>
+      </div>
+    </div>
+    <p class="note rv">Probable loss is an illustrative model (exposure estimate × likelihood by status) built from statutory figures, meant to be replaced with your own estimates. Rule lists are a starting set to confirm with counsel; you add your own. Examples in small text show how a layer looks in one place; the same structure applies wherever you operate. Each industry has its own checks, and results depend on the documents each organization uploads.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">The platform</div><h2 class="h2">Six things every deployment gets.</h2></div>
+    <div class="pillars stag">
+      <div class="card rv"><div class="n">01</div><h3 class="h3">Private by architecture</h3><p>Models, documents, prompts and answers stay on your hardware. Air-gapped installs are supported.</p></div>
+      <div class="card rv"><div class="n">02</div><h3 class="h3">Owned intelligence</h3><p>Evaluations, training data and model versions are yours, built from your work and portable.</p></div>
+      <div class="card rv"><div class="n">03</div><h3 class="h3">Model freedom</h3><p>Gemma today, any open-weight model tomorrow. Change models without changing your workflows.</p></div>
+      <div class="card rv"><div class="n">04</div><h3 class="h3">Compliance built in</h3><p>Obligations by industry and place, evidence, tasks, probable loss and printable reports.</p></div>
+      <div class="card rv"><div class="n">05</div><h3 class="h3">Tamper-evident audit</h3><p>Every action is a block in a SHA-256 hash chain, written in plain sentences: who did what, when.</p></div>
+      <div class="card rv"><div class="n">06</div><h3 class="h3">Access that follows roles</h3><p>Departments, roles and permissions decide who sees which documents and which AI answers.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt">
+  <div class="orb" data-par=".1" aria-hidden="true" style="width:460px;height:460px;background:#5544F5;top:-260px;left:30%"></div>
+  <div class="wrap rv" style="position:relative"><div class="eyebrow">Get started</div><h2 class="h2">Bring one workflow. See it running on your own hardware.</h2><p class="lead" style="margin:18px auto 0">A 30-minute session with the Vector team, built around your environment and your rules.</p><div class="cta-row" style="justify-content:center"><a class="btn pri" href="#contact" data-go="contact">Book a demo</a><a class="btn" href="app/">Open the product</a></div></div>
+</section>
+</main>
+
+<!-- ======================= COMPANY ======================= -->
+<main data-page="company" hidden>
+<section class="hero" style="padding-bottom:24px">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="orb" data-par=".2" aria-hidden="true" style="width:460px;height:460px;background:#5544F5;top:-220px;right:10%"></div>
+  <div class="wrap" style="position:relative">
+    <div class="eyebrow rise">Company</div>
+    <h1 class="h1 rise d1" style="margin-top:16px;max-width:900px">Intelligence you <span class="shine">own.</span></h1>
+    <p class="lead rise d2">Vector builds the infrastructure for organizations to own their AI: deployed on hardware they control, connected to their knowledge, adapted to their work and compliant with the rules of every place they operate.</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:56px" id="customers">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Customers</div><h2 class="h2">Already deployed inside the walls.</h2><p class="lead">Every deployment runs on the customer's own servers with open-weight models, and no request goes to an external AI API. Compliance checks differ by industry and are run against each customer's own uploaded documents.</p></div>
+    <div class="cfilter rv" id="cfilter" role="tablist" aria-label="Filter customers by domain">
+      <button class="fb on" data-f="all">All <span>4</span></button>
+      <button class="fb" data-f="edu">Education <span>2</span></button>
+      <button class="fb" data-f="law">Law <span>1</span></button>
+      <button class="fb" data-f="health">Healthcare <span>1</span></button>
+    </div>
+  </div>
+  <div class="ccar rv" id="ccar"><div class="ctrack" id="ctrack">
+
+    <article class="card cu" data-cat="edu">
+      <figure class="cimg2"><img src="assets/clients/mitwpu.jpg" data-fallback="assets/clients/placeholder.svg" alt="MIT-WPU" loading="lazy"></figure>
+      <div class="cb2">
+        <div class="meta"><span class="chip ok">Deployed</span><span class="dim">Education · Pune</span></div>
+        <h3>MIT World Peace University</h3>
+        <div class="nums sm"><div><b>27,000</b><span>students</span></div><div><b>700</b><span>faculty</span></div><div><b>$320k+</b><span>payments</span></div></div>
+        <div class="bubbles"><span class="star">QS Reimagine award · AI student score checker</span><span>Exams and convocation</span><span>Accreditation and compliance audit from internal documents</span><span>National, state and university rules</span><span>Gemma 4 fine-tuned on private data · university servers</span></div>
+      </div>
+    </article>
+
+    <article class="card cu" data-cat="edu">
+      <figure class="cimg2"><img src="assets/clients/mumbai-college.jpg" data-fallback="assets/clients/placeholder.svg" alt="Shri Ram College of Commerce" loading="lazy"></figure>
+      <div class="cb2">
+        <div class="meta"><span class="chip ok">Deployed</span><span class="dim">Education · University of Mumbai</span></div>
+        <h3>Shri Ram College of Commerce</h3>
+        <div class="nums sm"><div><b>5,000</b><span>students</span></div><div><b>138</b><span>faculty</span></div></div>
+        <div class="bubbles"><span>AI student evaluator</span><span>Compliance checks: university, state and national rules</span><span>On college servers</span></div>
+      </div>
+    </article>
+
+    <article class="card cu" data-cat="law">
+      <figure class="cimg2"><img src="assets/clients/law-firm.jpg" data-fallback="assets/clients/placeholder.svg" alt="Illuminati Humanista" loading="lazy"></figure>
+      <div class="cb2">
+        <div class="meta"><span class="chip ok">Deployed</span><span class="dim">Law · Partner firm</span></div>
+        <h3>Illuminati Humanista</h3>
+        <div class="bubbles"><span>Agentic case research</span><span>AI scheduling and drafting</span><span>Compliance agent: local and national rules</span><span>Entire system on the firm's servers</span></div>
+      </div>
+    </article>
+
+    <article class="card cu" data-cat="health">
+      <figure class="cimg2"><img src="assets/clients/hospitals.jpg" data-fallback="assets/clients/placeholder.svg" alt="Pulse Emergency Hospital" loading="lazy"></figure>
+      <div class="cb2">
+        <div class="meta"><span class="chip ok">Deployed</span><span class="dim">Healthcare · Mumbai</span></div>
+        <h3>Pulse Emergency Hospital Pvt Ltd</h3>
+        <div class="bubbles"><span>Compliance audit check from uploaded documents</span><span>Clinical, billing and privacy assistants</span><span>National and state rules · hospital servers</span></div>
+      </div>
+    </article>
+
+  </div></div>
+</section>
+
+<section class="sec alt" id="testimonials">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">In their words</div><h2 class="h2">What our customers say.</h2></div>
+    <div class="tgrid stag">
+      <!-- Replace each placeholder with the customer's approved quote. -->
+      <figure class="card tq rv"><span class="qm">“</span><blockquote class="ph">Testimonial from the Registrar, MIT-WPU, to be added.</blockquote><figcaption><b>Registrar</b><span>MIT World Peace University</span></figcaption></figure>
+      <figure class="card tq rv"><span class="qm">“</span><blockquote class="ph">Testimonial from the Vice Principal, Shri Ram College of Commerce, to be added.</blockquote><figcaption><b>Vice Principal</b><span>Shri Ram College of Commerce</span></figcaption></figure>
+      <figure class="card tq rv"><span class="qm">“</span><blockquote class="ph">Testimonial from Pipli Datta, Illuminati Humanista, to be added.</blockquote><figcaption><b>Pipli Datta</b><span>Vice President, Illuminati Humanista</span></figcaption></figure>
+      <figure class="card tq rv"><span class="qm">“</span><blockquote class="ph">Testimonial from Nishant Raj, Pulse Emergency Hospital, to be added.</blockquote><figcaption><b>Nishant Raj</b><span>Director, Pulse Emergency Hospital</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="team">
+  <div class="wrap">
+    <div class="rv"><div class="eyebrow">Team</div><h2 class="h2">The people behind Vector.</h2></div>
+    <div class="tgroup rv">Mentors</div>
+    <div class="team2 stag">
+      <div class="card tm2 rv"><img src="assets/team/pipli.jpg" data-fallback="assets/team/placeholder.svg" alt="Pipli Datta"><div><h3>Pipli Datta</h3><div class="role">MENTOR · LEGAL SERVICES</div><div class="sub">Vice President, Business Manager</div><p>Eight years in private wealth management and investment banking at JPMorgan Services India, then corporate commercial law (LLB, Government Law College, Mumbai) with Wadia Ghandy &amp; Co. and Veritas Legal, and litigation at the Bombay High Court and the courts of Mumbai and Thane.</p></div></div>
+      <div class="card tm2 rv"><img src="assets/team/veera.jpg" data-fallback="assets/team/placeholder.svg" alt="Prof. (Dr.) Veera Bhaskar"><div><h3>Prof. (Dr.) Veera Bhaskar</h3><div class="role">MENTOR · ACADEMIC AND EDUCATION SERVICES</div><div class="sub">Controller of Examinations</div><p>25+ years in academic governance, examination reform and accreditation. NAAC Assessor, AICTE member and quality controller for SWAYAM/NPTEL; 75+ publications, chapters and patents; Rajiv Gandhi Gold Medal; shortlisted for the QS Reimagine Education Award.</p></div></div>
+    </div>
+    <div class="tgroup rv">Developers</div>
+    <div class="devs stag">
+      <div class="card dev rv"><img src="assets/team/suryansh.jpg" data-fallback="assets/team/placeholder.svg" alt="Suryansh Talukdar"><h3>Suryansh Talukdar</h3><div class="role">DEVELOPER</div></div>
+      <div class="card dev rv"><img src="assets/team/nagababu.jpg" data-fallback="assets/team/placeholder.svg" alt="Nagababu Molleti"><h3>Nagababu Molleti</h3><div class="role">DEVELOPER</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap rv"><h2 class="h2">Want your AI inside your own walls?</h2><div class="cta-row" style="justify-content:center"><a class="btn pri" href="#contact" data-go="contact">Book a demo</a></div></div>
+</section>
+</main>
+
+<!-- ======================= CONTACT ======================= -->
+<main data-page="contact" hidden>
+<section class="hero">
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="orb" data-par=".2" aria-hidden="true" style="width:520px;height:520px;background:#5544F5;top:-200px;left:-160px"></div>
+  <div class="wrap cgrid">
+    <div>
+      <div class="eyebrow rise">Book a demo</div>
+      <h1 class="h1 rise d1" style="margin-top:16px;font-size:clamp(40px,5vw,66px)">See your AI running on <span class="shine">your hardware.</span></h1>
+      <p class="lead rise d2">A 30-minute session: we walk through documents, models, fine-tuning, internal chat and compliance for the places you operate, then scope your first deployment.</p>
+      <ul class="ticks rise d3" style="margin-top:28px"><li>Bring one workflow you want to automate</li><li>Tell us where you operate; we bring the rules</li><li>Leave with a plan for a private deployment</li></ul>
+    </div>
+    <div class="rise d2">
+      <section class="card calcard" aria-labelledby="cal-h">
+        <header class="calhead"><span class="calico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/></svg></span><div><h2 id="cal-h" class="h3">Book a virtual meeting</h2><p class="muted" style="font-size:14.5px">Pick a time that suits you. Calendly sends a confirmation and a calendar invite.</p></div></header>
+        <!-- Calendly booking calendar, embedded directly (no external script needed) -->
+        <iframe class="calframe" id="calframe" src="https://calendly.com/suryanshtalukdar02/hello?hide_gdpr_banner=1&amp;embed_type=Inline" allow="payment" title="Book a meeting with Vector" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <p class="note" style="margin-top:10px">Calendar not showing? <a href="https://calendly.com/suryanshtalukdar02/hello" target="_blank" rel="noopener">Open the booking page</a>.</p>
+      </section>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><a class="brand" href="#home" data-go="home"><img src="assets/logo.svg" alt="">Vector</a><p style="margin-top:10px;max-width:320px">Private AI, owned intelligence and built-in compliance.</p></div>
+    <nav><a href="#platform" data-go="home" data-to="platform">Platform</a><a href="#how" data-go="home" data-to="how">How it works</a><a href="#areas" data-go="home" data-to="areas">Service areas</a><a href="#company" data-go="company">Company</a><a href="#contact" data-go="contact">Contact</a><a href="app/">Sign in</a></nav>
+    <div style="width:100%;font-size:12.5px;color:var(--faint)">© 2026 Vector. Compliance figures are indicators, not legal advice.</div>
+  </div>
+</footer>
+
+<script src="assets/vendor/lenis.min.js"></script>
+<script>
+(function(){
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let lenis=null;
+  try{ if(!reduce&&window.Lenis){ lenis=new Lenis({duration:1.15,easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)),smoothWheel:true,wheelMultiplier:.95}); (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(performance.now()); } }catch(e){ lenis=null; }
+  const scrollToEl=(el)=>{ if(!el) return; const y=el.getBoundingClientRect().top+scrollY-64; if(lenis) lenis.scrollTo(y,{duration:1.2}); else scrollTo({top:y,behavior:reduce?'auto':'smooth'}); };
+  const toTop=()=>{ if(lenis) lenis.scrollTo(0,{immediate:true}); else scrollTo(0,0); };
+
+  /* customers marquee: duplicate the row so it loops seamlessly */
+  const mq=$('#marquee'); mq.innerHTML+=mq.innerHTML;
+
+  /* service areas + compliance (edit here). "in" = In the platform today, "dep" = built per deployment. */
+  const LAYERS=[['intl','International standards'],['national','National law'],['state','State or province'],['local','Local and board rules'],['own','Your own policies']];
+  const AREAS=[
+    {k:'Medical',word:'hospitals',lead:'Patient data stays inside the hospital network. One private platform serves clinical, operations, billing, compliance and research teams, with role-based access, audit logs and human approval where it matters.',
+     note:'Administrative and documentation AI carries a different regulatory burden from AI that diagnoses or recommends treatment. Vector\'s healthcare applications produce drafts for doctors, coders and the compliance office to approve; they do not make clinical decisions.',
+     cards:[['in','Clinical documentation',['Discharge summary drafts from the hospital\'s template','Clinical policy assistant with citations','Structured drafts from encounter notes for sign-off']],['in','Patient data protection',['De-identification of names, IDs, record numbers, phones, addresses','Breach assessment against the data protection and cyber rules that apply','Vendor data processing agreement review']],['in','Billing and insurance',['ICD-10 coding suggestions for coder review','Pre-authorization requests for insurers','Missing-documentation checks before claims']],['in','Compliance and accreditation',['National and state rules mapped to hospital policies','Evidence, gaps and probable loss by place','Audit-ready reports on a hash-chained ledger']],['dep','Hospital operations',['Bed, staff and operating-theatre scheduling support','Emergency department demand forecasting','Inventory and consumables planning']],['in','Patient communication',['Plain-language replies drafted for nurse review','Urgent-symptom flags on incoming messages','Patient instructions in local languages']],['dep','Research and trials',['Literature review on the hospital\'s own corpus','Cohort discovery on de-identified data','Clinical trial document checks']],['dep','AI agents',['Clinical, operations, finance and compliance agents','One shared intelligence layer, role-based permissions','Human approval on every consequential step']]],
+     rules:{intl:[['Information security management','ISO/IEC 27001','Certification at risk']],national:[['Health and personal data protection','e.g. DPDP Act (India) · HIPAA (US) · GDPR (EU)','up to ₹250 cr · $2.19M/yr'],['Cyber incident reporting','e.g. CERT-In, 6 hours (India) · HIPAA breach rule, 60 days (US)','fines and imprisonment'],['Clinical establishment registration and records','e.g. Clinical Establishments Act (India)','closure risk'],['Imaging and diagnostics','e.g. PC-PNDT Act (India)','licence suspension'],['Bio-medical waste','e.g. Bio-Medical Waste Rules 2016 (India)','penalty and closure']],state:[['Hospital or nursing home registration','e.g. Maharashtra Nursing Homes Act · state licensure (US)','renew before expiry'],['State health data laws','e.g. California CMIA · Texas HB 300','per violation'],['Pollution control authorisation','e.g. State Pollution Control Board','annual report']],local:[['Patients\' rights charter and schedule of charges','displayed at reception','inspection finding'],['Board policies','e.g. quarterly review of AI systems','board finding']],own:[['Internal policies and procedures','retention, access, AI use, incident drills','—']]},
+     check:[['Incident reporting procedure','doc',1],['Registration number','input',1],['Registration valid until','input',0],['Bio-medical waste annual report date','input',0],['Imaging register (Form F) audit','doc',0],['Grievance officer','input',1]]},
+    {k:'Law',word:'law firms',lead:'Privileged material stays on the firm\'s servers. Retrieval follows client-matter permissions and ethical walls, and every AI action is logged for professional-responsibility review.',
+     note:'Legal applications produce research notes and drafts for advocates to verify and sign. Vector does not give legal advice to clients.',
+     cards:[['dep','Agentic case research',['Research agent across precedent and the firm\'s own matters','Citations to every authority it relies on','Research memos for advocate review']],['dep','Drafting',['Pleadings, notices and contracts from the firm\'s templates','Clause libraries kept up to date','Version history with who changed what']],['dep','Scheduling',['Hearing dates, limitation periods and deadlines','Court and client reminders','Conflicts flagged before scheduling']],['in','Contract review',['Clause extraction: term, renewal, liability, termination','Comparison against the firm\'s standard positions','Missing or weaker clauses flagged']],['in','Compliance agent',['Bar and professional conduct rules tracked','Data protection for client files','Evidence and tasks for every gap']],['in','Confidentiality',['Client-matter permissions on every retrieval','Ethical walls between teams','Tamper-evident audit trail']]],
+     rules:{intl:[['Information security management','ISO/IEC 27001','client trust']],national:[['Professional conduct and confidentiality','e.g. Advocates Act and Bar Council of India Rules · ABA Model Rules (US)','disciplinary action'],['Client data protection','e.g. DPDP Act (India) · GDPR for EU clients','up to ₹250 cr · 4% of turnover'],['Record keeping and limitation','e.g. Limitation Act timelines','claim barred']],state:[['State bar rules','e.g. State Bar Council rules · state bar (US)','disciplinary action'],['State privacy laws','e.g. CCPA (California)','per violation']],local:[['Court and e-filing rules','e.g. High Court practice directions','filing rejected'],['Engagement and conflicts policy','engagement letters, conflict checks','malpractice risk']],own:[['Firm policies','ethical walls, retention, AI use','—']]},
+     check:[['Conflicts check procedure','doc',1],['Bar enrolment numbers on file','input',1],['Client data retention schedule','doc',0],['Date of last ethical-wall review','input',0],['Data protection officer','input',1]]},
+    {k:'Education',word:'universities',lead:'Student records, exams and accreditation evidence stay on the institution\'s own servers. Exams, convocation, evaluation and accreditation run on one private platform.',
+     note:'AI-assisted evaluation suggests marks against the rubric; faculty decide every result.',
+     cards:[['dep','Exams and convocation',['Exam forms, hall tickets and results','Convocation registration and payments','Board rules applied automatically']],['in','AI answer evaluation',['Scores answers against the rubric with reasons','Faculty approve or change every mark','Consistency across evaluators']],['in','Accreditation evidence',['Each office uploads; AI checks against the criteria','Gaps flagged before review','Reports generated as a byproduct']],['in','Policy assistant',['Answers for faculty and administration','Cited from statutes and ordinances','Department-scoped access']],['in','Student data protection',['Student records kept private','Consent and parental consent where required','Audit trail of every access']],['dep','Learning platform',['Course content and assessments','Adaptive practice on the institution\'s material','Runs on campus servers']]],
+     rules:{intl:[['Educational organization management','ISO 21001','—'],['International student data','GDPR for EU applicants','up to 4% of turnover']],national:[['Higher-education regulation and accreditation','e.g. UGC regulations and NAAC (India) · accreditors (US)','grading and funding'],['Student data protection','e.g. DPDP Act, children\'s data (India) · FERPA (US)','funding at risk · up to ₹200 cr']],state:[['State university law','e.g. Maharashtra Public Universities Act 2016','affiliation conditions'],['State student privacy laws','e.g. state statutes (US)','per violation']],local:[['University statutes and ordinances','examination, convocation and academic regulations','results challenged'],['Affiliation conditions','e.g. affiliating university requirements','affiliation at risk']],own:[['Institutional policies','assessment, AI use, records','—']]},
+     check:[['Examination ordinance','doc',1],['NAAC criterion evidence (Criterion 2)','doc',0],['Student grievance officer','input',1],['Date of last academic audit','input',0],['Records retention schedule','doc',1]]},
+    {k:'Logistics',word:'logistics teams',lead:'Shipment, customer and contract data stays in your network while AI reads documents, checks them and handles exceptions.',
+     note:'Logistics applications flag and draft; dispatchers and compliance staff approve.',
+     cards:[['dep','Document checks',['Bills of lading, invoices and customs documents read','Mismatches flagged before filing','E-way bill and permit data checked']],['dep','Exception triage',['Delays and damages classified','Suggested next action','Customer updates drafted']],['in','Contract review',['Carrier and customer contracts','Rate, liability and SLA clauses extracted','Weaker terms flagged']],['in','Safety assistant',['Driver and warehouse procedures with citations','Dangerous goods handling','Department-scoped answers']],['in','Compliance',['Transport, customs and data rules tracked','Expiring permits and licences flagged','Evidence and tasks per gap']],['dep','Operations',['Load and route planning support','Fleet maintenance from records','Demand forecasting']]],
+     rules:{intl:[['Supply chain security','ISO 28000','—'],['Dangerous goods','IMDG Code · IATA DGR','shipment refused']],national:[['Customs and trade documentation','e.g. Customs Act 1962 (India)','penalty and seizure'],['E-way bills and tax records','e.g. CGST Rule 138 (India)','penalty per consignment'],['Vehicles and tracking','e.g. Motor Vehicles Act and AIS-140 (India)','permit at risk'],['Data protection','e.g. DPDP Act (India) · GDPR (EU)','up to ₹250 cr']],state:[['State transport permits','e.g. state transport authority','vehicle detained'],['Shops and establishments registration','e.g. state Shops and Establishments Act','fines']],local:[['Warehouse and port rules','e.g. port authority, municipal licences','licence at risk']],own:[['Customer SLAs and company policies','—','—']]},
+     check:[['Customs broker licence number','input',1],['Dangerous goods procedure','doc',0],['Vehicle tracking compliance certificate','doc',1],['State permit valid until','input',0],['Data protection policy','doc',1]]},
+    {k:'Finance',word:'banks and NBFCs',lead:'Customer financial data and models stay under your control, with an audit trail regulators can verify.',
+     note:'Financial applications produce drafts and alerts; credit, compliance and risk teams decide.',
+     cards:[['dep','KYC and onboarding',['Identity and address documents checked','Mismatches and expiries flagged','Customer due diligence notes drafted']],['dep','Credit and policy drafting',['Credit memos from the file','Policy updates for review','Cited to source documents']],['dep','Fraud and claims triage',['Unusual patterns flagged for investigation','Duplicate and inconsistent records','Investigator notes drafted']],['in','Regulatory tracking',['Central bank and market regulator directions mapped to policies','Evidence and owners per obligation','Board-ready reports']],['in','Policy assistant',['Answers for branch and operations staff','Cited to internal circulars','Role-based access']],['in','Audit and model risk',['Every AI request on a hash-chained ledger','Model versions evaluated before use','Data stays on premises']]],
+     rules:{intl:[['Card data security','PCI DSS','fines and card scheme penalties'],['Information security','ISO/IEC 27001 · SWIFT CSP','—']],national:[['IT governance and outsourcing','e.g. RBI Master Directions (India)','monetary penalty'],['KYC and anti-money laundering','e.g. PMLA and RBI KYC (India) · BSA (US)','penalty and licence action'],['Securities cyber resilience','e.g. SEBI CSCRF (India)','penalty'],['Payment data localisation','e.g. RBI storage of payment data (India)','authorisation at risk']],state:[['State financial regulators','e.g. NYDFS Part 500 (New York)','per violation'],['State privacy and consumer laws','e.g. CCPA (California)','per violation']],local:[['Board-approved policies','credit, outsourcing, IT and cyber policies','supervisory finding']],own:[['Internal controls','model risk, access reviews, AI use','—']]},
+     check:[['Board-approved IT policy','doc',1],['Date of last VAPT','input',0],['KYC policy','doc',1],['Principal officer (AML)','input',1],['Outsourcing register','doc',0]]},
+  ];
+  let area=0, areaTimer=null, compLayer='national';
+  const chip=(t)=>t==='in'?'<span class="chip ok">In the platform</span>':'<span class="chip">Per deployment</span>';
+  function drawAreas(){
+    const a=AREAS[area];
+    const tabs=AREAS.map((x,i)=>`<button class="areab ${i===area?'on':''}" role="tab" aria-selected="${i===area}" data-area="${i}"><span class="n">0${i+1}</span>${x.k}</button>`).join('');
+    $('#areatabs').innerHTML=tabs; $('#compTabs').innerHTML=tabs;
+    $('#areaWord').textContent=a.word; $('#areaLead').textContent=a.lead; $('#areanote').textContent=a.note;
+    $('#areagrid').classList.toggle('six',a.cards.length===6); $('#areagrid').innerHTML=a.cards.map((c,i)=>`<div class="card hc"><div class="top"><span class="n">0${i+1}</span>${chip(c[0])}</div><h3>${c[1]}</h3><ul>${c[2].map(s=>`<li>${s}</li>`).join('')}</ul></div>`).join('');
+    drawRules(); resetCheck();
+  }
+  function drawRules(){
+    const a=AREAS[area];
+    $('#layers3').innerHTML=LAYERS.map(([k,l],i)=>`<div class="lay ${k===compLayer?'on':''}" data-layer="${k}" style="top:${10+i*82}px;z-index:${10-i}"><div><span>${l}</span><small>${(a.rules[k]||[]).length} rule${(a.rules[k]||[]).length===1?'':'s'} for ${a.k.toLowerCase()}</small></div></div>`).join('');
+    $('#rulecard').innerHTML=`<div class="ptop"><h3 class="h3">${a.k}: rules Vector tracks</h3><span class="chip">Area agnostic · examples in small text</span></div>`+LAYERS.map(([k,l])=>`<div class="lgroup ${k===compLayer?'hl':''}"><h4><span>${l}</span><span>If ignored</span></h4>${(a.rules[k]||[]).map(r=>`<div class="rrow"><b>${r[0]}</b><span class="pen">${r[2]}</span><span class="eg">${r[1]}</span></div>`).join('')}</div>`).join('');
+  }
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('[data-area]'); if(b){ area=+b.dataset.area; drawAreas(); clearInterval(areaTimer); return; }
+    const l=e.target.closest('[data-layer]'); if(l){ compLayer=l.dataset.layer; drawRules(); clearInterval(layerTimer); }
+  });
+  let layerTimer=null;
+  if(!reduce) layerTimer=setInterval(()=>{ const r=$('#layers3').getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0&&cur==='home'){ const i=LAYERS.findIndex(x=>x[0]===compLayer); compLayer=LAYERS[(i+1)%LAYERS.length][0]; drawRules(); } },3000);
+  if(!reduce) areaTimer=setInterval(()=>{ const r=$('#areatabs').getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0&&cur==='home'){ area=(area+1)%AREAS.length; drawAreas(); } },7000);
+
+  /* live compliance-check demo: pending items get provided one by one, progress rises, each step is hashed */
+  let ck=null, ckTimer=null, blk=212;
+  const hex=()=>Array.from({length:10},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join('');
+  function resetCheck(){
+    const a=AREAS[area]; ck=a.check.map(x=>({label:x[0],kind:x[1],done:!!x[2]}));
+    $('#cdTitle').textContent=a.k;
+    renderCheck(); $('#cdAudit').innerHTML=''; $('#cdState').textContent='Check complete · pending items assigned';
+  }
+  function renderCheck(flash){
+    const d=ck.filter(x=>x.done).length, p=Math.round(d/ck.length*100);
+    $('#cdPct').textContent=p; $('#cdBar').style.width=p+'%';
+    $('#cdRows').innerHTML=ck.map((x,i)=>`<div class="cdr ${x.done?'done':''} ${i===flash?'flash':''}"><span class="ic">${x.done?'✓':''}</span><span>${x.label}<span class="sub">${x.kind==='doc'?'document':'value'} · ${x.done?(x.by||(x.kind==='doc'?'matched in documents':'already on file')):'assigned, waiting'}</span></span><span class="st">${x.done?'Done':'Needed'}</span></div>`).join('');
+  }
+  const WHO=['Compliance office','IT security','Records team','Administration'];
+  function stepCheck(){
+    const r=$('#checkdemo').getBoundingClientRect(); if(!(r.top<innerHeight&&r.bottom>0&&cur==='home')) return;
+    const i=ck.findIndex(x=>!x.done);
+    if(i<0){ $('#cdState').textContent='All requirements met · ready for sign-off'; setTimeout(resetCheck,2600); return; }
+    ck[i].done=true; ck[i].by=(ck[i].kind==='doc'?'uploaded by ':'entered by ')+WHO[i%WHO.length];
+    blk++; const line=document.createElement('div'); line.innerHTML=`<b>block #${blk}</b> ${ck[i].label.toLowerCase()} · sha256 ${hex()}…`; const au=$('#cdAudit'); au.prepend(line); while(au.children.length>2) au.lastElementChild.remove();
+    $('#cdState').textContent='Re-checked · written to the audit chain'; renderCheck(i);
+    const steps=$$('#cfsteps .cfs'); steps.forEach((s,k)=>s.classList.toggle('on',k===4));
+  }
+  drawAreas();
+  if(!reduce) ckTimer=setInterval(stepCheck,1900);
+
+  /* hero: the assistant types its answer, citations pop in, then the loop repeats */
+  const QA=[
+    ['Within how many hours must a cyber incident be reported to CERT-In?','Within 6 hours of noticing it. Keep the logs for 180 days in India and inform the Compliance office at once',[1,2]],
+    ['How do I document a late entry in the chart?','Label it "Late entry", record the current date and time, refer to when care was given, and never alter the original note',[1]],
+    ['How quickly must we give patients copies of their records?','Within 72 hours of a written request, after verifying identity',[1]],
+  ];
+  let qi=0;
+  function typeQA(){
+    const [q,a,c]=QA[qi%QA.length]; qi++;
+    $('#q').textContent=q; const el=$('#a');
+    if(reduce){ el.innerHTML=a+c.map(n=>`<span class="cite">${n}</span>`).join(''); return; }
+    let i=0; el.innerHTML='<span class="caret"></span>';
+    (function step(){ if(i<=a.length){ el.innerHTML=a.slice(0,i)+'<span class="caret"></span>'; i+=2; setTimeout(step,24); } else { el.innerHTML=a+c.map(n=>`<span class="cite">${n}</span>`).join(''); setTimeout(typeQA,4200); } })();
+  }
+  setTimeout(typeQA,900);
+
+  /* models chip cycles to show "swap any time" */
+  const mods=$$('#models span'); let mi=0;
+  if(!reduce) setInterval(()=>{ mods.forEach(m=>m.classList.remove('on')); mi=(mi+1)%(mods.length-1); mods[mi].classList.add('on'); },2200);
+
+  /* live boundary feed */
+  const events=['Rohan Mehta assigned the CERT-In drill to Vikram Rao','Gemma drafted 4 training examples from the breach procedure','pulse-assistant:v2 passed the release gate on the hospital test set','Personal identifiers masked before a document was shared','Audit chain verified: every block intact','External AI request blocked at the boundary','Discharge summary draft created for doctor review'];
+  const fmt=(m)=>String(Math.floor(m/60)%24).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  let tk=0, clock=10*60+4;
+  if(!reduce) setInterval(()=>{ clock+=3; const li=document.createElement('li'); li.innerHTML=`<span class="t">${fmt(clock)}</span><span>${events[tk++%events.length]}</span>`; const fd=$('#feed'); fd.prepend(li); while(fd.children.length>3) fd.lastElementChild.remove(); },2800);
+
+  /* card hover glow follows the pointer */
+  document.addEventListener('pointermove',e=>{ const c=e.target.closest&&e.target.closest('.card'); if(!c) return; const r=c.getBoundingClientRect(); c.style.setProperty('--mx',(e.clientX-r.left)+'px'); c.style.setProperty('--my',(e.clientY-r.top)+'px'); },{passive:true});
+
+  /* reveal + counters */
+  let io=null;
+  const fill=(el)=>el.querySelectorAll('[data-w]').forEach(b=>b.style.width=b.dataset.w+'%');
+  function count(el){ if(el.dataset.done) return; el.dataset.done=1; const end=+el.dataset.count,p=el.dataset.prefix||'',s=el.dataset.suffix||'',t0=performance.now(); (function f(t){const k=Math.min(1,(t-t0)/1500),v=Math.round(end*(1-Math.pow(1-k,3))); el.textContent=p+v.toLocaleString('en-US')+s; if(k<1) requestAnimationFrame(f);})(t0); }
+  function reveal(scope){
+    if(reduce||!('IntersectionObserver' in window)){ $$('.rv',scope).forEach(fill); return; }
+    if(!io) io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.remove('pre'); e.target.querySelectorAll('[data-count]').forEach(count); fill(e.target); io.unobserve(e.target);} }),{rootMargin:'0px 0px -8% 0px'});
+    $$('.rv',scope).forEach(el=>{ if(el.getBoundingClientRect().top>innerHeight*.9){el.classList.add('pre');io.observe(el);} else { fill(el); el.querySelectorAll('[data-count]').forEach(count); } });
+  }
+
+  /* router with wipe transition: home (with section anchors), company, contact */
+  const PAGES=['home','company','contact'], ANCH=['platform','how','areas','compliance'];
+  let cur=null;
+  function show(page,to){
+    if(!PAGES.includes(page)) page='home';
+    const swap=()=>{
+      $$('[data-page]').forEach(p=>{ const on=p.dataset.page===page; p.hidden=!on; if(on){ p.classList.remove('page-in'); void p.offsetWidth; p.classList.add('page-in'); } });
+      toTop(); try{lenis&&lenis.resize()}catch(e){}
+      requestAnimationFrame(()=>reveal($(`[data-page="${page}"]`)));
+      if(to) setTimeout(()=>scrollToEl(document.getElementById(to)),80);
+    };
+    if(page!==cur){ if(cur===null||reduce) swap(); else { const w=$('#wipe'); w.classList.remove('go'); void w.offsetWidth; w.classList.add('go'); setTimeout(swap,430); } cur=page; }
+    else if(to) scrollToEl(document.getElementById(to));
+    $$('.links a').forEach(a=>a.classList.toggle('on', to ? a.dataset.to===to : (!a.dataset.to && a.dataset.go===page)));
+    try{ const h='#'+(to||page); if(location.hash!==h) history.replaceState(null,'',h); }catch(e){}
+    $('#links').classList.remove('open');
+  }
+  document.addEventListener('click',e=>{ const a=e.target.closest('[data-go]'); if(!a) return; e.preventDefault(); show(a.dataset.go,a.dataset.to); });
+  $('#burger').addEventListener('click',()=>$('#links').classList.toggle('open'));
+  const route=()=>{ const h=(location.hash||'#home').slice(1); if(ANCH.includes(h)) show('home',h); else show(h); };
+  addEventListener('hashchange',route); route();
+  try{ const cf=document.getElementById('calframe'); if(cf&&location.hostname){ const u=new URL(cf.src); u.searchParams.set('embed_domain',location.hostname); cf.src=u.toString(); } }catch(e){}
+
+  /* scroll extras: nav border, progress bar, orb parallax */
+  const bar=$('#bartop'), orbs=()=>$$('[data-page]:not([hidden]) [data-par]');
+  function onScroll(){
+    const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+    $('#nav').classList.toggle('sc',y>8);
+    bar.style.transform=`scaleX(${h>0?Math.min(1,y/h):0})`;
+    if(!reduce) orbs().forEach(o=>o.style.translate=`0 ${y*(+o.dataset.par)}px`);
+  }
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  /* customers: domain filter + moving carousel ("All" scrolls continuously; a single domain sits still) */
+  const track=$('#ctrack'), cards=[...track.children].map(c=>c.cloneNode(true));
+  function showCustomers(f){
+    const list=cards.filter(c=>f==='all'||c.dataset.cat===f);
+    track.innerHTML=''; list.forEach(c=>track.appendChild(c.cloneNode(true)));
+    const run=f==='all'&&!reduce;
+    if(run){ list.forEach(c=>{ const k=c.cloneNode(true); k.setAttribute('aria-hidden','true'); track.appendChild(k); }); }
+    track.classList.toggle('run',run); $('#ccar').classList.toggle('still',!run);
+    track.querySelectorAll('img[data-fallback]').forEach(i=>{ const fb=()=>{ if(i.dataset.fb) return; i.dataset.fb=1; i.src=i.dataset.fallback; }; i.addEventListener('error',fb); if(i.complete&&!i.naturalWidth) fb(); });
+    $$('#cfilter .fb').forEach(b=>{ const on=b.dataset.f===f; b.classList.toggle('on',on); b.setAttribute('aria-selected',on); });
+  }
+  $('#cfilter').addEventListener('click',e=>{ const b=e.target.closest('[data-f]'); if(b) showCustomers(b.dataset.f); });
+  showCustomers('all');
+})();
+</script>
+<script>document.querySelectorAll("img[data-fallback]").forEach(function(i){function f(){if(i.dataset.fb)return;i.dataset.fb=1;i.src=i.dataset.fallback;}i.addEventListener("error",f);if(i.complete&&!i.naturalWidth)f();});</script>
+</body>
+</html>

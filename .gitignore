@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+.npm/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+credentials/
+
+# Local data and databases (review before publishing)
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+
+# Operating system and editor files
+.DS_Store
+.AppleDouble
+.vscode/
+.idea/
+
+# Build output
+dist/
+build/
+coverage/
+.next/
